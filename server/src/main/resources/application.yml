@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/dlsrb6342/config-test
+          username: dlsrb6342
+          password: hig#125487
