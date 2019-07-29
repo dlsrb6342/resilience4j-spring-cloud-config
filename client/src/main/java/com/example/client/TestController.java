@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.github.resilience4j.bulkhead.Bulkhead;
 import io.github.resilience4j.bulkhead.BulkheadRegistry;
+import io.github.resilience4j.bulkhead.ThreadPoolBulkhead;
+import io.github.resilience4j.bulkhead.ThreadPoolBulkheadRegistry;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import io.github.resilience4j.ratelimiter.RateLimiter;
@@ -19,15 +21,18 @@ public class TestController {
     private final RetryRegistry retryRegistry;
     private final RateLimiterRegistry rateLimiterRegistry;
     private final BulkheadRegistry bulkheadRegistry;
+    private final ThreadPoolBulkheadRegistry threadPoolBulkheadRegistry;
 
     public TestController(CircuitBreakerRegistry circuitBreakerRegistry,
                           RetryRegistry retryRegistry,
                           RateLimiterRegistry rateLimiterRegistry,
-                          BulkheadRegistry bulkheadRegistry) {
+                          BulkheadRegistry bulkheadRegistry,
+                          ThreadPoolBulkheadRegistry threadPoolBulkheadRegistry) {
         this.circuitBreakerRegistry = circuitBreakerRegistry;
         this.retryRegistry = retryRegistry;
         this.rateLimiterRegistry = rateLimiterRegistry;
         this.bulkheadRegistry = bulkheadRegistry;
+        this.threadPoolBulkheadRegistry = threadPoolBulkheadRegistry;
     }
 
     @GetMapping("/test")
@@ -36,5 +41,6 @@ public class TestController {
         Retry retry = retryRegistry.retry("test");
         RateLimiter rateLimiter = rateLimiterRegistry.rateLimiter("test");
         Bulkhead bulkhead = bulkheadRegistry.bulkhead("test");
+        ThreadPoolBulkhead threadPoolBulkhead = threadPoolBulkheadRegistry.bulkhead("test");
     }
 }

@@ -19,8 +19,6 @@ ext {
 }
 
 dependencies {
-    implementation 'io.github.resilience4j:resilience4j-spring-boot2:0.17.0-SNAPSHOT'
-
     implementation 'org.springframework.cloud:spring-cloud-config-server'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
